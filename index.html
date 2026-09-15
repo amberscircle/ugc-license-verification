@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>UGC Affiliate License Verification</title>
+
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+
+    body {
+
+      margin: 0;
+
+      min-height: 100vh;
+
+      display: flex;
+
+      justify-content: center;
+
+      align-items: center;
+
+      padding: 20px;
+
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+      background: #f7f7f7;
+
+      color: #111;
+
+    }
+
+
+    .container {
+
+      width: 100%;
+
+      max-width: 460px;
+
+      background: #ffffff;
+
+      padding: 40px 30px;
+
+      border-radius: 18px;
+
+      box-shadow:
+        0 10px 35px rgba(0, 0, 0, 0.08);
+
+      text-align: center;
+
+    }
+
+
+    h1 {
+
+      margin: 0 0 12px;
+
+      font-size: 27px;
+
+      line-height: 1.2;
+
+    }
+
+
+    .description {
+
+      margin: 0 0 28px;
+
+      color: #666;
+
+      font-size: 15px;
+
+      line-height: 1.6;
+
+    }
+
+
+    input {
+
+      width: 100%;
+
+      padding: 15px;
+
+      border: 1px solid #d4d4d4;
+
+      border-radius: 10px;
+
+      font-size: 16px;
+
+      text-align: center;
+
+      outline: none;
+
+      transition: border-color 0.2s;
+
+    }
+
+
+    input:focus {
+
+      border-color: #111;
+
+    }
+
+
+    button {
+
+      width: 100%;
+
+      margin-top: 14px;
+
+      padding: 15px;
+
+      border: none;
+
+      border-radius: 10px;
+
+      background: #111;
+
+      color: #fff;
+
+      font-size: 16px;
+
+      font-weight: 700;
+
+      cursor: pointer;
+
+      transition: opacity 0.2s;
+
+    }
+
+
+    button:hover {
+
+      opacity: 0.88;
+
+    }
+
+
+    button:disabled {
+
+      opacity: 0.55;
+
+      cursor: wait;
+
+    }
+
+
+    #result {
+
+      display: none;
+
+      margin-top: 25px;
+
+      padding: 18px;
+
+      border-radius: 10px;
+
+      font-size: 16px;
+
+      line-height: 1.5;
+
+      font-weight: 600;
+
+    }
+
+
+    #result.success {
+
+      display: block;
+
+      background: #edf8f0;
+
+      color: #176b2c;
+
+    }
+
+
+    #result.error {
+
+      display: block;
+
+      background: #fff0f0;
+
+      color: #a00000;
+
+    }
+
+
+    .verified {
+
+      font-size: 20px;
+
+      font-weight: 800;
+
+      margin-bottom: 5px;
+
+    }
+
+
+    .footer {
+
+      margin-top: 25px;
+
+      font-size: 12px;
+
+      color: #999;
+
+    }
+
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <div class="container">
+
+
+    <h1>
+      UGC Affiliate License Verification
+    </h1>
+
+
+    <p class="description">
+
+      Enter your unique license code below
+      to verify your license and access.
+
+    </p>
+
+
+    <input
+      type="text"
+      id="licenseCode"
+      placeholder="Enter your license code"
+      autocomplete="off"
+      spellcheck="false"
+    >
+
+
+    <button
+      type="button"
+      id="verifyBtn"
+    >
+      Verify License
+    </button>
+
+
+    <div id="result"></div>
+
+
+    <div class="footer">
+      License Verification System
+    </div>
+
+
+  </div>
+
+
+
+  <script>
+
+
+    /*
+    ==================================================
+    APPS SCRIPT BACKEND URL
+    ==================================================
+    */
+
+    const BACKEND_URL =
+      "https://script.google.com/macros/s/AKfycbxWws4qJeLSdJ-zRumqVesPA2rBooaXPWqSxdlPH1SS1h5WHSOJtet----rkkyibqgt/exec";
+
+
+
+    const verifyButton =
+      document.getElementById("verifyBtn");
+
+
+    const licenseInput =
+      document.getElementById("licenseCode");
+
+
+    const resultBox =
+      document.getElementById("result");
+
+
+
+    function showResult(type, message) {
+
+      resultBox.className = type;
+
+      resultBox.innerHTML = message;
+
+    }
+
+
+
+    async function verifyLicense() {
+
+
+      const code =
+        licenseInput.value.trim();
+
+
+      if (!code) {
+
+        showResult(
+          "error",
+          "Please enter your license code."
+        );
+
+        return;
+
+      }
+
+
+      verifyButton.disabled = true;
+
+      verifyButton.innerText =
+        "Checking...";
+
+
+      resultBox.style.display = "block";
+
+      resultBox.className = "";
+
+      resultBox.innerText =
+        "Checking license...";
+
+
+      try {
+
+
+        const requestURL =
+          BACKEND_URL +
+          "?code=" +
+          encodeURIComponent(code);
+
+
+        const response =
+          await fetch(requestURL);
+
+
+        if (!response.ok) {
+
+          throw new Error(
+            "Unable to connect to the verification server."
+          );
+
+        }
+
+
+        const data =
+          await response.json();
+
+
+
+        if (
+          data.success === true &&
+          data.status === "verified"
+        ) {
+
+
+          showResult(
+            "success",
+            `
+              <div class="verified">
+                LICENSE VERIFIED
+              </div>
+
+              <div>
+                ACCESS GRANTED
+              </div>
+            `
+          );
+
+
+        } else {
+
+
+          showResult(
+            "error",
+            data.message ||
+            "License verification failed."
+          );
+
+        }
+
+
+      } catch (error) {
+
+
+        showResult(
+          "error",
+          "Unable to verify the license. Please try again."
+        );
+
+
+        console.error(error);
+
+      }
+
+
+      verifyButton.disabled = false;
+
+      verifyButton.innerText =
+        "Verify License";
+
+    }
+
+
+
+    verifyButton.addEventListener(
+      "click",
+      verifyLicense
+    );
+
+
+
+    licenseInput.addEventListener(
+      "keydown",
+      function(event) {
+
+        if (event.key === "Enter") {
+
+          verifyLicense();
+
+        }
+
+      }
+    );
+
+
+  </script>
+
+
+</body>
+
+</html>
