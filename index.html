@@ -1,39 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
-
-  <title>UGC Affiliate License Verification</title>
-
+  <title>Amber's Circle | License Verification</title>
 
   <style>
-
     * {
       box-sizing: border-box;
     }
 
-
     body {
-
       margin: 0;
-
       min-height: 100vh;
-
-      display: flex;
-
-      justify-content: center;
-
-      align-items: center;
-
-      padding: 20px;
-
       font-family:
         -apple-system,
         BlinkMacSystemFont,
@@ -41,214 +21,260 @@
         Arial,
         sans-serif;
 
-      background: #f7f7f7;
+      background:
+        linear-gradient(
+          135deg,
+          #faf8f6 0%,
+          #f4efec 50%,
+          #eee7e3 100%
+        );
 
-      color: #111;
-
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 24px;
+      color: #222;
     }
 
-
-    .container {
-
+    .card {
       width: 100%;
-
-      max-width: 460px;
-
-      background: #ffffff;
-
-      padding: 40px 30px;
-
-      border-radius: 18px;
+      max-width: 470px;
+      background: rgba(255, 255, 255, 0.96);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      border-radius: 24px;
+      padding: 44px 34px;
+      text-align: center;
 
       box-shadow:
-        0 10px 35px rgba(0, 0, 0, 0.08);
-
-      text-align: center;
-
+        0 20px 60px rgba(0, 0, 0, 0.10);
     }
 
+    .brand {
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .brand-line {
+      width: 42px;
+      height: 2px;
+      background: #222;
+      margin: 0 auto 28px;
+    }
+
+    .eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #888;
+      margin-bottom: 10px;
+    }
 
     h1 {
-
-      margin: 0 0 12px;
-
-      font-size: 27px;
-
+      margin: 0;
+      font-size: 29px;
       line-height: 1.2;
-
+      letter-spacing: -0.5px;
     }
-
 
     .description {
-
-      margin: 0 0 28px;
-
-      color: #666;
-
+      margin: 15px auto 30px;
+      max-width: 360px;
+      color: #707070;
       font-size: 15px;
-
       line-height: 1.6;
-
     }
 
+    .input-label {
+      display: block;
+      text-align: left;
+      font-size: 12px;
+      font-weight: 700;
+      color: #555;
+      margin-bottom: 8px;
+    }
 
     input {
-
       width: 100%;
+      padding: 16px 15px;
 
-      padding: 15px;
+      border: 1px solid #d8d4d1;
+      border-radius: 12px;
 
-      border: 1px solid #d4d4d4;
-
-      border-radius: 10px;
+      background: #fff;
 
       font-size: 16px;
-
       text-align: center;
+      letter-spacing: 0.5px;
 
       outline: none;
 
-      transition: border-color 0.2s;
-
+      transition:
+        border-color 0.2s,
+        box-shadow 0.2s;
     }
-
 
     input:focus {
+      border-color: #222;
 
-      border-color: #111;
-
+      box-shadow:
+        0 0 0 3px rgba(0, 0, 0, 0.06);
     }
 
+    input::placeholder {
+      color: #aaa;
+      letter-spacing: 0;
+    }
 
     button {
-
       width: 100%;
-
       margin-top: 14px;
 
-      padding: 15px;
+      padding: 16px;
 
       border: none;
+      border-radius: 12px;
 
-      border-radius: 10px;
-
-      background: #111;
-
+      background: #222;
       color: #fff;
 
-      font-size: 16px;
-
+      font-size: 15px;
       font-weight: 700;
+      letter-spacing: 0.3px;
 
       cursor: pointer;
 
-      transition: opacity 0.2s;
-
+      transition:
+        transform 0.15s,
+        opacity 0.2s;
     }
-
 
     button:hover {
-
-      opacity: 0.88;
-
+      opacity: 0.9;
     }
 
+    button:active {
+      transform: scale(0.99);
+    }
 
     button:disabled {
-
       opacity: 0.55;
-
       cursor: wait;
-
     }
-
 
     #result {
-
       display: none;
-
-      margin-top: 25px;
-
-      padding: 18px;
-
-      border-radius: 10px;
-
-      font-size: 16px;
-
+      margin-top: 22px;
+      padding: 20px;
+      border-radius: 14px;
       line-height: 1.5;
-
-      font-weight: 600;
-
     }
-
 
     #result.success {
-
       display: block;
-
-      background: #edf8f0;
-
-      color: #176b2c;
-
+      background: #eef8f1;
+      border: 1px solid #cfe8d6;
+      color: #216b35;
     }
-
 
     #result.error {
-
       display: block;
-
-      background: #fff0f0;
-
-      color: #a00000;
-
+      background: #fff2f2;
+      border: 1px solid #f0d1d1;
+      color: #a32929;
     }
 
+    .success-icon {
+      width: 42px;
+      height: 42px;
 
-    .verified {
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
+      margin: 0 auto 12px;
+
+      border-radius: 50%;
+
+      background: #216b35;
+      color: #fff;
+
+      font-size: 22px;
+      font-weight: 700;
+    }
+
+    .verified-title {
       font-size: 20px;
-
       font-weight: 800;
-
-      margin-bottom: 5px;
-
+      letter-spacing: 0.3px;
     }
 
+    .verified-subtitle {
+      margin-top: 4px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .checking {
+      font-size: 14px;
+      color: #777;
+    }
 
     .footer {
-
-      margin-top: 25px;
-
-      font-size: 12px;
-
-      color: #999;
-
+      margin-top: 28px;
+      font-size: 11px;
+      color: #aaa;
+      letter-spacing: 0.4px;
     }
 
+    @media (max-width: 480px) {
+      body {
+        padding: 16px;
+      }
 
+      .card {
+        padding: 36px 24px;
+        border-radius: 20px;
+      }
+
+      h1 {
+        font-size: 26px;
+      }
+    }
   </style>
-
 </head>
-
 
 <body>
 
+  <main class="card">
 
-  <div class="container">
+    <div class="brand">
+      Amber's Circle
+    </div>
 
+    <div class="brand-line"></div>
+
+    <div class="eyebrow">
+      UGC Affiliate
+    </div>
 
     <h1>
-      UGC Affiliate License Verification
+      License Verification
     </h1>
 
-
     <p class="description">
-
-      Enter your unique license code below
-      to verify your license and access.
-
+      Enter your unique license code below to verify your license and confirm access.
     </p>
 
+    <label
+      class="input-label"
+      for="licenseCode"
+    >
+      LICENSE CODE
+    </label>
 
     <input
       type="text"
@@ -258,7 +284,6 @@
       spellcheck="false"
     >
 
-
     <button
       type="button"
       id="verifyBtn"
@@ -266,25 +291,21 @@
       Verify License
     </button>
 
-
     <div id="result"></div>
 
-
     <div class="footer">
-      License Verification System
+      Amber's Circle · License Verification System
     </div>
 
-
-  </div>
-
+  </main>
 
 
   <script>
 
-
     /*
     ==================================================
-    APPS SCRIPT BACKEND URL
+    APPS SCRIPT BACKEND
+    DO NOT CHANGE
     ==================================================
     */
 
@@ -292,32 +313,43 @@
       "https://script.google.com/macros/s/AKfycbxWws4qJeLSdJ-zRumqVesPA2rBooaXPWqSxdlPH1SS1h5WHSOJtet----rkkyibqgt/exec";
 
 
-
     const verifyButton =
       document.getElementById("verifyBtn");
 
-
     const licenseInput =
       document.getElementById("licenseCode");
-
 
     const resultBox =
       document.getElementById("result");
 
 
+    function showSuccess() {
 
-    function showResult(type, message) {
+      resultBox.className = "success";
 
-      resultBox.className = type;
+      resultBox.innerHTML = `
+        <div class="success-icon">✓</div>
 
-      resultBox.innerHTML = message;
+        <div class="verified-title">
+          LICENSE VERIFIED
+        </div>
 
+        <div class="verified-subtitle">
+          ACCESS GRANTED
+        </div>
+      `;
     }
 
 
+    function showError(message) {
+
+      resultBox.className = "error";
+
+      resultBox.innerText = message;
+    }
+
 
     async function verifyLicense() {
-
 
       const code =
         licenseInput.value.trim();
@@ -325,13 +357,11 @@
 
       if (!code) {
 
-        showResult(
-          "error",
+        showError(
           "Please enter your license code."
         );
 
         return;
-
       }
 
 
@@ -341,16 +371,15 @@
         "Checking...";
 
 
-      resultBox.style.display = "block";
-
       resultBox.className = "";
 
-      resultBox.innerText =
-        "Checking license...";
+      resultBox.style.display = "block";
+
+      resultBox.innerHTML =
+        '<div class="checking">Checking license...</div>';
 
 
       try {
-
 
         const requestURL =
           BACKEND_URL +
@@ -365,9 +394,8 @@
         if (!response.ok) {
 
           throw new Error(
-            "Unable to connect to the verification server."
+            "Server connection failed."
           );
-
         }
 
 
@@ -375,47 +403,27 @@
           await response.json();
 
 
-
         if (
           data.success === true &&
           data.status === "verified"
         ) {
 
-
-          showResult(
-            "success",
-            `
-              <div class="verified">
-                LICENSE VERIFIED
-              </div>
-
-              <div>
-                ACCESS GRANTED
-              </div>
-            `
-          );
-
+          showSuccess();
 
         } else {
 
-
-          showResult(
-            "error",
+          showError(
             data.message ||
             "License verification failed."
           );
 
         }
 
-
       } catch (error) {
 
-
-        showResult(
-          "error",
+        showError(
           "Unable to verify the license. Please try again."
         );
-
 
         console.error(error);
 
@@ -426,16 +434,13 @@
 
       verifyButton.innerText =
         "Verify License";
-
     }
-
 
 
     verifyButton.addEventListener(
       "click",
       verifyLicense
     );
-
 
 
     licenseInput.addEventListener(
@@ -451,10 +456,7 @@
       }
     );
 
-
   </script>
 
-
 </body>
-
 </html>
